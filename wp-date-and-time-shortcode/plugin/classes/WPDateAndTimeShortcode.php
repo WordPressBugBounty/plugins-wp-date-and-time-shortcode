@@ -30,6 +30,10 @@ class WPDateAndTimeShortcode extends Plugin {
         'sun' => 7
     ];
     
+    protected $newsletter_timeout_name;
+    
+    protected $newsletter_message;
+    
     public function __construct($id, $data = []) {
         // Set text_domain for the framework
         $this->text_domain = 'denra-wp-dt';
@@ -108,7 +112,47 @@ class WPDateAndTimeShortcode extends Plugin {
             'seconds_change' => 0,
         ];
         
-        $this->addShortcodes();   
+        $this->newsletter_timeout_name = 'wpdts_pro_admin_notice';
+        $this->newsletter_message = 'Would you like to be informed when our annual subscription-based <strong>WP Date and Time Shortcode Pro Editon</strong> plugin is released? Please <a href="https://stats.sender.net/forms/e1wWRV/view" target="_blank">subscribe to our newsletter</a>. Additionaly, you may also <a href="https://www.paypal.com/paypalme/itinchev" target="_blank">donate any amount</a> to support the free edition! Thank you!';
+        
+        $this->addShortcodes();
+        
+        add_action('admin_init', [$this, 'hookAdminInitWPDateAndTimeShortcode']);
+    }
+    
+    public function hookAdminInitWPDateAndTimeShortcode() {
+        global $pagenow;
+        $page = !empty($_GET['page']) ? $_GET['page'] : '';
+        if ($pagenow != 'index.php' && !in_array($page, ['denra-plugins', 'denra-plugin-wp-date-and-time-shortcode'])) {
+            return;
+        }
+        $newsletter_timeout = intval(get_option($this->newsletter_timeout_name));
+        $current_time = current_time('timestamp');
+        if (isset($_GET['wpdts_newsletter_reminder'])) {
+            $wpdts_newsletter_reminder = filter_input(INPUT_GET, 'wpdts_newsletter_reminder', FILTER_SANITIZE_NUMBER_INT);
+            switch($wpdts_newsletter_reminder) {
+                case 15:
+                case 30:
+                    $expiration_seconds = DAY_IN_SECONDS * $wpdts_newsletter_reminder;
+                    break;
+                default:
+                    $expiration_seconds = 30;
+                    break;
+                case -1:
+                    $expiration_seconds = YEAR_IN_SECONDS * 200;
+                    break;
+            }
+            update_option($this->newsletter_timeout_name, $current_time + $expiration_seconds, true);
+        }
+        elseif ($current_time > $newsletter_timeout) {
+            add_action('admin_notices', [$this, 'hookAdminNoticesWPDTSPro']);
+        }
+    }
+    
+    public function hookAdminNoticesWPDTSPro() {
+        $admin_home_url = get_admin_url() . 'index.php?wpdts_newsletter_reminder=';
+        $hide_message_btns = '<p>Hide this message:<br><a href="' . $admin_home_url . '15" class="button action" style="margin:1em 1em 0 0;">For 15 days</a> <a href="' . $admin_home_url . '30" class="button action" style="margin:1em 1em 0 0;">For 30 days</a> <a href="' . $admin_home_url . '-1" class="button action" style="margin:margin:1em 1em 0 0;">Forever - Never remind me again!</a></p>';
+        echo '<div class="notice notice-warning is-dismissible"><p>' . $this->newsletter_message . '</p>' . $hide_message_btns . '</div>';
     }
     
     public function addShortcodes() {
@@ -544,6 +588,11 @@ class WPDateAndTimeShortcode extends Plugin {
         
         // convert to string and return the display result
         return strval($result);
+    }
+    
+    public function adminSettingsContent() {
+        echo '<p>' . $this->newsletter_message . '</p>';
+        parent::adminSettingsContent();
     }
     
 }

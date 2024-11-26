@@ -1,11 +1,11 @@
 ﻿=== WP Date and Time Shortcode ===
 Contributors: denra, itinchev
 Donate link: https://www.paypal.me/itinchev
-Tags: wp, date, time, shortcode, shortcodes, wordpress, wpdts, show, display, post, page, content, plugins, next, today, tomorrow, year, month, day, weekday, name, current, past, future
+Tags: wpdts, date, time, shortcode, shortcodes
 Requires at least: 4.0
-Tested up to: 6.6
+Tested up to: 6.7.1
 Requires PHP: 7.4
-Stable tag: 2.6.6
+Stable tag: 2.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -217,6 +217,11 @@ As we were improving the plugin we found out the `[wpdts]` shortcode will be muc
 We have generally completed the development of Free edition of this plugin and it has a big number of features which may cover every basic need. In future we will be mainly supporting it for WordPress version compatibility and bugs. However we will be releasing a Pro edition soon with an annual subscription plan and it will have many new features. Please send all your suggestions and ideas to our [e-mail address](mailto:support@denra.com) and they may be developed and included in the paid product in future. Please note that if you have suggested a new feature and it is implemented you will get a 1-year subscription for 1 website for free.
 
 == Changelog ==
+
+= 2.6.7 =
+* Removed: The localization code of the Framework for the administration page is leading to a notice in the PHP error log file with the new WordPress 6.7.x versions, so it was removed for now. The localization ability will be restored in a future framework version.
+* Improved: Compatibility with WordPress version 6.7.1.
+* Added: A reminder for newsletter subscription and donation.
 
 = 2.6.6 =
 * Improved: Does not throw an error when unknown `time_zone` attribute value is used.

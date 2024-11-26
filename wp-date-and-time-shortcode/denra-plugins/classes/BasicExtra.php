@@ -6,9 +6,9 @@
  * Added extra properties and methods to the Basic related to file, dir, url.
  *
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
- * @copyright  2019-2020 Denra.com aka SoftShop Ltd
+ * @copyright  2019-2024 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.1.1
+ * @version    1.1.2
  * @link       https://www.denra.com/
  */
 
@@ -44,12 +44,13 @@ class BasicExtra extends Basic {
         $this->plugin_basename = \plugin_basename($this->file);
         
         // Load Text Domain
+        /*
         if ($this->text_domain) {
             $mofile = $this->dir . 'i18n/' .  $this->text_domain . '-' . \get_locale() . '.mo';
             if (file_exists($mofile)) {
                 \load_textdomain($this->text_domain, $mofile);
             }
-        }
+        }*/
         
         //add_action('plugins_loaded', [&$this, 'loadTextDomain']);
         

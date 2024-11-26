@@ -6,9 +6,9 @@
  * The Denra Plugins Framework class.
  *
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
- * @copyright  2019-2020 Denra.com aka SoftShop Ltd
+ * @copyright  2019-2024 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.3.7
+ * @version    1.3.8
  * @link       https://www.denra.com/
  */
 
@@ -22,11 +22,11 @@ namespace Denra\Plugins;
 class Framework extends BasicExtra {
     
     // The version here and above in the comments MUST MATCH !!!
-    public static $version = '1.3.7';
+    public static $version = '1.3.8';
     
     public $url_website = 'https://denra.com/';
     public $url_support_page = 'https://denra.com/';
-    public $url_donation = 'https://www.paypal.me/itinchev';
+    public $url_donation = 'https://www.paypal.com/paypalme/itinchev';
     public $email_support = 'support@denra.com';
     
     const LOGO_SIGN_BASE64_ENCODED = 
@@ -77,6 +77,7 @@ class Framework extends BasicExtra {
             }
             
             // Load all text domains in case of Framework admin Home page
+            /*
             if (filter_input(INPUT_GET, 'page') == $this->id && $plugin_obj->text_domain && $plugin_id != $data['framework_plugin_id']) {
                 if ($plugin_obj->text_domain) {
                     $mofile = $plugin_obj->dir . 'i18n/' .  $plugin_obj->text_domain . '-' . \get_locale() . '.mo';
@@ -84,7 +85,7 @@ class Framework extends BasicExtra {
                         \load_textdomain($plugin_obj->text_domain, $mofile);
                     }
                 }
-            }
+            }*/
         }
         
         // Add the admin menus for the Framework

@@ -6,9 +6,9 @@
  * This is the basic class for all plugins in the Denra Plugins Framework.
  *
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
- * @copyright  2019 Denra.com aka SoftShop Ltd
+ * @copyright  2019-2024 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.1.1
+ * @version    1.1.2
  * @link       https://www.denra.com/
  */
 
@@ -42,11 +42,6 @@ class Plugin extends BasicExtra {
         // Call the parent constructor
         parent::__construct($id, $data);
         
-        if(!function_exists('get_plugin_data')) {
-            require_once( \ABSPATH . 'wp-admin/includes/plugin.php' );
-        }
-        $this->data = \get_plugin_data($this->file);
-        
         // Load or create settings for the plugin
         $this->settings = $this->settings_default;
         if (count($this->settings_default) > 1) { // if plugin added more settings
@@ -57,8 +52,9 @@ class Plugin extends BasicExtra {
                 $this->settings = $this->settings_default;
             }
         }
+         
+        add_action('init', [$this, 'hookInitPlugin']);
         
-                
         if (\current_user_can('manage_options')) {
             if ($this->admin_title_menu) {
                 \add_action('admin_menu', [&$this, 'settingsSubMenu'], 2);
@@ -67,6 +63,13 @@ class Plugin extends BasicExtra {
             \add_filter('plugin_row_meta', [&$this, 'pluginRowMeta'], 10, 2);
         }
         
+    }
+    
+    public function hookInitPlugin() {
+        if(!function_exists('get_plugin_data')) {
+            require_once( \ABSPATH . 'wp-admin/includes/plugin.php' );
+        }
+        $this->data = \get_plugin_data($this->file);
     }
     
     public function settingsSubMenu() {
@@ -121,6 +124,7 @@ class Plugin extends BasicExtra {
         
         echo '<div class="denra-plugins-header">';
         echo '<h1>' . \__($this->data['Name'], $this->text_domain) . ' ' . $this->data['Version'] . '</h1>';
+        echo preg_replace('/(\<cite\>)(.*)(\<\/cite\>)/i', '$1$3', $this->data['Description']);
         echo '</div>';
         
         echo '<div class="denra-plugins-content">';
@@ -165,7 +169,7 @@ class Plugin extends BasicExtra {
         \do_action('denra_plugins_admin_settings_footer_top');
         
         echo '<p><hr></p><h2>' . \__('Plugin Information', 'denra-plugins') . '</h2>';
-        echo '<p>' . \__('Learn more about this plugin on its page at WordPress.org:', 'denra-plugins') . '<br><a href="' . $this->data['PluginURI'] . '" target="_blank">' . $this->data['PluginURI'] . '</a></p>';
+        echo '<p>' . \__('Learn more about this plugin:', 'denra-plugins') . '<br><a href="' . $this->data['PluginURI'] . '" target="_blank">' . $this->data['PluginURI'] . '</a></p>';
         echo '<p>' . \__('Get free support by e-mail:', 'denra-plugins') . '<br><a href="mailto:' . $denra_plugins['framework']->email_support . '">' . $denra_plugins['framework']->email_support . '</a></p>';
         echo '<p><a href="' . $denra_plugins['framework']->url_donation . '" target="_blank">' . \__('Please donate', 'denra-plugins') . '</a>' . \__(' if you like this plugin and it is helpful to you.', 'denra-plugins') . '</p>';
         

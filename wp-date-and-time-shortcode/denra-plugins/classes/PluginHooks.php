@@ -54,6 +54,7 @@ class PluginHooks {
         if ($settings['delete_plugin_settings_on_uninstall']) {
             \delete_option($settings_id_u);
             \delete_option($just_activated_id_u);
+            \delete_option('wpdts_pro_admin_notice');
         }
         
     }
