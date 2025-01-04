@@ -113,7 +113,7 @@ class WPDateAndTimeShortcode extends Plugin {
         ];
         
         $this->newsletter_timeout_name = 'wpdts_pro_admin_notice';
-        $this->newsletter_message = 'Would you like to be informed when our annual subscription-based <strong>WP Date and Time Shortcode Pro Editon</strong> plugin is released? Please <a href="https://stats.sender.net/forms/e1wWRV/view" target="_blank">subscribe to our newsletter</a>. Additionaly, you may also <a href="https://www.paypal.com/paypalme/itinchev" target="_blank">donate any amount</a> to support the free edition! Thank you!';
+        $this->newsletter_message = 'Would you like to be informed when our annual subscription-based <strong>WP Date and Time Shortcode Pro Editon</strong> plugin is released? Please <a href="https://stats.sender.net/forms/e1wWRV/view" target="_blank">subscribe to our newsletter</a>. Additionally, you may also <a href="https://www.paypal.com/paypalme/itinchev" target="_blank">donate any amount</a> to support the free edition! Thank you!';
         
         $this->addShortcodes();
         

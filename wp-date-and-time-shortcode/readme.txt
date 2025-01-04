@@ -1,6 +1,6 @@
 ﻿=== WP Date and Time Shortcode ===
 Contributors: denra, itinchev
-Donate link: https://www.paypal.me/itinchev
+Donate link: https://www.paypal.com/paypalme/itinchev
 Tags: wpdts, date, time, shortcode, shortcodes
 Requires at least: 4.0
 Tested up to: 6.7.1
@@ -19,7 +19,7 @@ This is probably the last date and time shortcode plugin you will ever need for 
 
 *It takes lots of efforts to develop and support a plugin. Please send us your feedback and questions to fix your issue before leaving a bad review.*
 
-Are you satisfied by using this plugin? Consider leaving a [5 star review](https://wordpress.org/support/plugin/wp-date-and-time-shortcode/reviews/?rate=5#new-post). You can also [donate](https://www.paypal.me/itinchev).
+Are you satisfied by using this plugin? Consider leaving a [5 star review](https://wordpress.org/support/plugin/wp-date-and-time-shortcode/reviews/?rate=5#new-post). You can also [donate](https://www.paypal.com/paypalme/itinchev).
 
 If you need support or more information about this free plugin please read the description and the F.A.Q. section below or write in the [Support Forum](https://wordpress.org/support/plugin/wp-date-and-time-shortcode/).
 
@@ -65,7 +65,7 @@ If you need more detailed features please use the shortcode attributes.
 
 * Show date and/or time in the default WordPress formats.
 * Show date and/or time in custom format based on the PHP [date and time formatting characters](https://www.php.net/manual/en/datetime.format.php)
-* Show date and/or time based on fixed SQL/date/time format or any [relative date and time format](https://www.php.net/manual/en/datetime.formats.relative.php)
+* Show date and/or time based on fixed SQL/date/time format or any [relative date and time format](https://www.php.net/manual/en/datetime.formats.php). See the Relative Formats section.
 * Show year separately as 4 or 2-digit number (e.g. 1999 or 99).
 * Show month as number (1-12), full name (January-December) or 3-letter name (Jan-Dec).
 * Show day as number with or without leading zero, with or without suffix (st, nd, rd, th).
@@ -111,7 +111,7 @@ You can add the following attributes to **`[wpdts]`** to show the date and time 
     * `time-zone` - the current time-zone for the shortcode result
 * `format` - date format used with the PHP [date and time formatting characters](https://www.php.net/manual/en/datetime.format.php) only when `item` is set to `custom`
 * `start` - set the basic date and time for the shortcode; defaults to the WordPress time in the current timezone.
-    * initial date and/or time string based on fixed SQL/date/time formats (e.g. 2019-09-16 17:45:53 or Sep 16, 2019 17:45:53) or any [relative date and time format](https://www.php.net/manual/en/datetime.formats.relative.php)
+    * initial date and/or time string based on fixed SQL/date/time formats (e.g. 2019-09-16 17:45:53 or Sep 16, 2019 17:45:53) or any [relative date and time format](https://www.php.net/manual/en/datetime.formats.php). See the Relative Formats section.
     * `now` - the default initial current date and time based on the WordPress General settings time-zone
     * `post-created` - gets the post/page creation date and time
     * `post-created-gmt` - gets the post/page creation date and time GMT
@@ -261,7 +261,7 @@ We have generally completed the development of Free edition of this plugin and i
 * Other: WordPress 5.5 compatibility.
 
 = 2.5.1 =
-* Added: Description how to show date and/or time based on any [relative date and time format](https://www.php.net/manual/en/datetime.formats.relative.php).
+* Added: Description how to show date and/or time based on any [relative date and time format](https://www.php.net/manual/en/datetime.formats.php). See the Relative Formats section.
 
 = 2.5 =
 * Fixed: Removed Framework warnings on plugin activation and usage.
