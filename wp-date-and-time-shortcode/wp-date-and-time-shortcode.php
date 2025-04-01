@@ -4,7 +4,7 @@
 Plugin Name: WP Date and Time Shortcode
 Plugin URI: https://www.denra.com/products/wordpress/plugins/wp-date-and-time-shortcode/
 Description: Show dynamically any current, past or future date or time in posts and pages.
-Version: 2.6.7
+Version: 2.6.8
 Author: Denra.com aka SoftShop Ltd.
 Author URI: https://www.denra.com/
 Text Domain: denra-wp-dt

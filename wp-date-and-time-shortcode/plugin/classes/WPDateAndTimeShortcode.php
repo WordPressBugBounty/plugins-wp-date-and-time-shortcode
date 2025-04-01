@@ -8,7 +8,7 @@
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
  * @copyright  2019 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.5.6
+ * @version    1.5.7
  * @link       https://www.denra.com/
  */
 
@@ -176,6 +176,7 @@ class WPDateAndTimeShortcode extends Plugin {
         // Sanitize attributes.
         if (is_array($atts)) {
             foreach ($atts as $key => $value) {
+                $value = trim(htmlspecialchars_decode($value));
                 if (in_array($value, ['yes', '1', 'on', 1, true], true)) {
                     $atts[$key] = 1;
                 }
@@ -185,8 +186,8 @@ class WPDateAndTimeShortcode extends Plugin {
                 elseif (is_numeric($value)) {
                     $atts[$key] = (int) $value;
                 }
-                else {
-                    $atts[$key] = trim(htmlspecialchars_decode($value), '" ');
+                elseif (preg_match('/<\s?[^\>]*\/?\s?>/i', $value)) { //checks for HTML/XML in the attribute content
+                    $atts[$key] = ''; // removes the value if it is HTML/XML
                 }
             }
         }
