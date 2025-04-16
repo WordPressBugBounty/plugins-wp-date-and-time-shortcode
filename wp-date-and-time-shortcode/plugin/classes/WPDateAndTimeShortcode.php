@@ -8,7 +8,7 @@
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
  * @copyright  2019 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.5.7
+ * @version    1.5.8
  * @link       https://www.denra.com/
  */
 
@@ -37,9 +37,6 @@ class WPDateAndTimeShortcode extends Plugin {
     public function __construct($id, $data = []) {
         // Set text_domain for the framework
         $this->text_domain = 'denra-wp-dt';
-        
-        // Set admin menus texts
-        $this->admin_title_menu = __('WP Date and Time Shortcode', 'denra-wp-dt');
         
         parent::__construct($id, $data);
         
@@ -112,16 +109,24 @@ class WPDateAndTimeShortcode extends Plugin {
             'seconds_change' => 0,
         ];
         
-        $this->newsletter_timeout_name = 'wpdts_pro_admin_notice';
-        $this->newsletter_message = 'Would you like to be informed when our annual subscription-based <strong>WP Date and Time Shortcode Pro Editon</strong> plugin is released? Please <a href="https://stats.sender.net/forms/e1wWRV/view" target="_blank">subscribe to our newsletter</a>. Additionally, you may also <a href="https://www.paypal.com/paypalme/itinchev" target="_blank">donate any amount</a> to support the free edition! Thank you!';
-        
         $this->addShortcodes();
         
-        add_action('admin_init', [$this, 'hookAdminInitWPDateAndTimeShortcode']);
+        if (\current_user_can('manage_options')) {
+            add_action('init', [$this, 'hookInitWPDateAndTimeShortcode']);
+            add_action('admin_init', [$this, 'hookAdminInitWPDateAndTimeShortcode']);
+        }
+    }
+    
+    public function hookInitWPDateAndTimeShortcode() {
+        $this->admin_title_menu = __('WP Date and Time Shortcode', 'denra-wp-dt');
+    
+        $this->newsletter_timeout_name = 'wpdts_pro_admin_notice';
+        $this->newsletter_message = 'Would you like to be informed when our annual subscription-based <strong>WP Date and Time Shortcode Pro Editon</strong> plugin is released? Please <a href="https://stats.sender.net/forms/e1wWRV/view" target="_blank">subscribe to our newsletter</a>. Additionally, you may also <a href="https://www.paypal.com/paypalme/itinchev" target="_blank">donate any amount</a> to support the free edition! Thank you!';
     }
     
     public function hookAdminInitWPDateAndTimeShortcode() {
         global $pagenow;
+        
         $page = !empty($_GET['page']) ? $_GET['page'] : '';
         if ($pagenow != 'index.php' && !in_array($page, ['denra-plugins', 'denra-plugin-wp-date-and-time-shortcode'])) {
             return;
