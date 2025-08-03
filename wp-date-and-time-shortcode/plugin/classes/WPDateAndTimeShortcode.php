@@ -6,9 +6,9 @@
  * The main class for the WP Date and Time Shortcode plugin
  *
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
- * @copyright  2019 Denra.com aka SoftShop Ltd
+ * @copyright  2019-2025 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.5.8
+ * @version    1.5.9
  * @link       https://www.denra.com/
  */
 
@@ -19,6 +19,8 @@ class WPDateAndTimeShortcode extends Plugin {
     protected array $items;
     
     protected array $attributes;
+    
+    protected array $options;
     
     protected array $days_of_week = [
         'mon' => 1,
@@ -99,6 +101,7 @@ class WPDateAndTimeShortcode extends Plugin {
             'zero'           => 1,          // use leading zero for months, days, hours, minutes, seconds
             'i18n'           => 1,          // display days of week and months' names in the current locale language
             'post_id'        => 0,          // post ID from which to get post-created(-gmt) or post-modified(-gmt)
+            'options'        => '',         // additional options e.g. key1=value1|key2=value2|key3=value3|etc.
             
             // *_change for backward compatibility with version 1.1
             'years_change'   => 0,
@@ -108,6 +111,8 @@ class WPDateAndTimeShortcode extends Plugin {
             'minutes_change' => 0,
             'seconds_change' => 0,
         ];
+        
+        $this->options = [];
         
         $this->addShortcodes();
         
@@ -286,6 +291,15 @@ class WPDateAndTimeShortcode extends Plugin {
             else {
                 return sprintf(__("The post with ID: %s does not exist.", 'denra-wp-dt'), $atts['post_id']);
             }
+        }
+        
+        if (!empty($atts['options'])) {
+            $pairs = explode('|', $atts['options']);
+            foreach ($pairs as $pair) {
+                list($key, $value) = explode('=', $pair);
+                $this->options[$key] = $value;
+            }
+            unset($atts['options']);
         }
         
         if ($atts['time_zone']) {
@@ -592,8 +606,7 @@ class WPDateAndTimeShortcode extends Plugin {
                 break;       
         }
         
-        // convert to string and return the display result
-        return strval($result);
+        return apply_filters('denra_wpdts_result', strval($result), $timestamp_local, $atts, $this->options);
     }
     
     public function adminSettingsContent() {

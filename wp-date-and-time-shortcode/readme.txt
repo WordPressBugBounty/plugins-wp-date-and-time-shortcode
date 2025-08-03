@@ -3,9 +3,9 @@ Contributors: denra, itinchev
 Donate link: https://www.paypal.com/paypalme/itinchev
 Tags: wpdts, date, time, shortcode, shortcodes
 Requires at least: 4.0
-Tested up to: 6.8
+Tested up to: 6.8.2
 Requires PHP: 7.4
-Stable tag: 2.6.9
+Stable tag: 2.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -127,6 +127,7 @@ You can add the following attributes to **`[wpdts]`** to show the date and time 
 * `hours_24` - set 12 or 24 hours format for the `hours` item.
 * `am_pm` - used with the `am-pm` item when 12 hours format is preferred: "L" for lowercase (am, pm) or "U" for uppercase (AM, PM)
 * `post_id` - post ID from which to get post-created(-gmt) or post-modified(-gmt)
+* `options` - additional options e.g. key1=value1|key2=value2|key3=value3|etc. which may be used with the `denra_wpdts_result` filter
 * `years` - change in years e.g. `years="+1"` or `years="-1"` before showing
 * `months` - change in months e.g. `months="+2"` or `months="-2"` before showing
 * `days` - change in days e.g. `days="+7"` or `days="-7"` before showing
@@ -134,6 +135,9 @@ You can add the following attributes to **`[wpdts]`** to show the date and time 
 * `minutes`, `minutes_change` - change in minutes e.g. `minutes="+30"` or `minutes="-30"` before showing
 * `seconds`, `seconds_change`  - change in seconds e.g. `seconds="+45"` or `seconds="-45"` before showing
 * `zero` - show leading zero when months, days, hours, minutes and seconds are displayed. Old ones '*x*-zero' for each separate item are still supported for compatibility.
+
+= Filter Hooks =
+* `denra_wpdts_result` ($result, $timestamp, $atts, $options) - for additional processing of the shortcode result
 
 == (COMING ASAP) 3.0 PRO EDITION with an annual subscription plan ==
 
@@ -217,6 +221,10 @@ As we were improving the plugin we found out the `[wpdts]` shortcode will be muc
 We have generally completed the development of Free edition of this plugin and it has a big number of features which may cover every basic need. In future we will be mainly supporting it for WordPress version compatibility and bugs. However we will be releasing a Pro edition soon with an annual subscription plan and it will have many new features. Please send all your suggestions and ideas to our [e-mail address](mailto:support@denra.com) and they may be developed and included in the paid product in future. Please note that if you have suggested a new feature and it is implemented you will get a 1-year subscription for 1 website for free.
 
 == Changelog ==
+
+= 2.7 =
+* Added: `denra_wpdts_result` filter for custom processing of the shortcode result and extending with custom features.
+* Added: `options` attribute for custom options to be used with the `denra_wpdts_result` filter.
 
 = 2.6.9 =
 * Fixed: Notice for incorrect call of _load_textdomain_just_in_time function for the new WordPress versions was removed.
