@@ -3,7 +3,7 @@ Contributors: denra, itinchev
 Donate link: https://www.paypal.com/paypalme/itinchev
 Tags: wpdts, date, time, shortcode, shortcodes
 Requires at least: 4.0
-Tested up to: 6.8.2
+Tested up to: 6.9
 Requires PHP: 7.4
 Stable tag: 2.7
 License: GPLv2 or later
