@@ -3,9 +3,9 @@ Contributors: denra, itinchev
 Donate link: https://www.paypal.com/paypalme/itinchev
 Tags: wpdts, date, time, shortcode, shortcodes
 Requires at least: 4.0
-Tested up to: 6.9
+Tested up to: 7.0
 Requires PHP: 7.4
-Stable tag: 2.7
+Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -116,13 +116,14 @@ You can add the following attributes to **`[wpdts]`** to show the date and time 
     * `post-created` - gets the post/page creation date and time
     * `post-created-gmt` - gets the post/page creation date and time GMT
     * `post-modified` - gets the post/page last modification date and time
-    * `post-modified-gmt` - gets the post/page last modification date and time GMT   
+    * `post-modified-gmt` - gets the post/page last modification date and time GMT
 * `next` - move the start date and time to the next coming selected (can have more than one value separated by comma)
     * `mon`, `tue`, `wed`, `thu`, `fri`, `sat`, `sun` - weekday shortname (and with first letter in uppercase)
     * `1`-`31` - day of month
     * `last-day-of-month` - the last day of month - 28, 29, 30, or 31
 * `time_zone` - select the time-zone for which to display the result from the available PHP [time-zones](https://www.php.net/manual/en/timezones.php).
 * `i18n` - set months and weeks names to be displayed in the current language ('yes' by default)
+* `case` - display the final date and time in upper case (`uc`), upper case first letter (`ucf`), upper case words (`ucw`), or lower case (`lc`)
 * `days_suffix` - set suffix st, nd, rd, th for the `day` and `days` item e.g. 1st, 2nd, 3rd, 4th, etc.
 * `hours_24` - set 12 or 24 hours format for the `hours` item.
 * `am_pm` - used with the `am-pm` item when 12 hours format is preferred: "L" for lowercase (am, pm) or "U" for uppercase (AM, PM)
@@ -221,6 +222,9 @@ As we were improving the plugin we found out the `[wpdts]` shortcode will be muc
 We have generally completed the development of Free edition of this plugin and it has a big number of features which may cover every basic need. In future we will be mainly supporting it for WordPress version compatibility and bugs. However we will be releasing a Pro edition soon with an annual subscription plan and it will have many new features. Please send all your suggestions and ideas to our [e-mail address](mailto:support@denra.com) and they may be developed and included in the paid product in future. Please note that if you have suggested a new feature and it is implemented you will get a 1-year subscription for 1 website for free.
 
 == Changelog ==
+
+= 2.7.1 =
+* Added: `case` attribute to display the result as upper case (uc), uppercase first letter (ucf) uppercase words (ucw), or lowercase (lc).
 
 = 2.7 =
 * Added: `denra_wpdts_result` filter for custom processing of the shortcode result and extending with custom features.

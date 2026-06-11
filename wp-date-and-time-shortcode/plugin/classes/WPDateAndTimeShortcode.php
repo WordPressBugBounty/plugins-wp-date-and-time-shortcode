@@ -8,7 +8,7 @@
  * @author     Denra.com aka SoftShop Ltd <support@denra.com>
  * @copyright  2019-2025 Denra.com aka SoftShop Ltd
  * @license    GPLv2 or later
- * @version    1.5.9
+ * @version    1.6.0
  * @link       https://www.denra.com/
  */
 
@@ -100,6 +100,7 @@ class WPDateAndTimeShortcode extends Plugin {
             'seconds'        => 0,          // change in seconds
             'zero'           => 1,          // use leading zero for months, days, hours, minutes, seconds
             'i18n'           => 1,          // display days of week and months' names in the current locale language
+            'case'           => '',         // change the result text to upper case (uc), upper case first letter (ucf), upper case words (ucw) or lower case (lc)
             'post_id'        => 0,          // post ID from which to get post-created(-gmt) or post-modified(-gmt)
             'options'        => '',         // additional options e.g. key1=value1|key2=value2|key3=value3|etc.
             
@@ -606,7 +607,24 @@ class WPDateAndTimeShortcode extends Plugin {
                 break;       
         }
         
-        return apply_filters('denra_wpdts_result', strval($result), $timestamp_local, $atts, $this->options);
+        $result = apply_filters('denra_wpdts_result', strval($result), $timestamp_local, $atts, $this->options);
+        
+        switch ($atts['case']) {
+            case 'uc':
+                $result = strtoupper($result);
+                break;
+            case 'ucf':
+                $result = ucfirst($result);
+                break;
+            case 'ucw':
+                $result = ucwords($result);
+                break;
+            case 'lc':
+                $result = strtolower($result);
+                break;
+        }
+        
+        return $result;
     }
     
     public function adminSettingsContent() {
