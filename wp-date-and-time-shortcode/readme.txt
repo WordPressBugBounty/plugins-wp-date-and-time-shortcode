@@ -3,7 +3,7 @@ Contributors: denra, itinchev
 Donate link: https://www.paypal.com/paypalme/itinchev
 Tags: wpdts, date, time, shortcode, shortcodes
 Requires at least: 4.0
-Tested up to: 7.0
+Tested up to: 7.1
 Requires PHP: 7.4
 Stable tag: 2.7.1
 License: GPLv2 or later
@@ -224,7 +224,7 @@ We have generally completed the development of Free edition of this plugin and i
 == Changelog ==
 
 = 2.7.1 =
-* Added: `case` attribute to display the result as upper case (uc), uppercase first letter (ucf) uppercase words (ucw), or lowercase (lc).
+* Added: `case` attribute to display the result as upper case (uc), uppercase first letter (ucf), uppercase words (ucw), or lowercase (lc).
 
 = 2.7 =
 * Added: `denra_wpdts_result` filter for custom processing of the shortcode result and extending with custom features.
